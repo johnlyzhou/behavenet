@@ -54,8 +54,14 @@ def build_hdf5(
     if label_file is not None:
         labels, masks = load_raw_labels(
             label_file, pose_algo=pose_algo, likelihood_thresh=label_likelihood_thresh)
+
+        # manually remove uninformative labels
+        # labels = labels[:, [0, 1, 2, 3, 4, 6, 7, 9]]
+        # masks = masks[:, [0, 1, 2, 3, 4, 6, 7, 9]]
+
         # error check
         n_total_labels = labels.shape[0]
+        print(n_total_frames, n_total_labels)
         assert n_total_frames == n_total_labels, 'Number of frames does not match number of labels'
     else:
         labels = None
