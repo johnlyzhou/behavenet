@@ -66,7 +66,6 @@ def generate_labels(hparams, sess_ids):
     hparams_new = copy.deepcopy(hparams)
 
     data_generator = build_data_generator(hparams_new, sess_ids, export_csv=False)
-    dtypes = data_generator._dtypes
 
     data, _ = data_generator.next_batch('train')
     n_labels = data['labels'].shape[2]
@@ -105,7 +104,7 @@ if __name__ == "__main__":
         "config", help="path to config.json", nargs=1)
     parser.add_argument(
         "home_dir", help="home directory path", nargs=1)
-    args = parser.parse_args()
+    arguments = parser.parse_args()
 
-    main(args)
+    main(arguments)
 
